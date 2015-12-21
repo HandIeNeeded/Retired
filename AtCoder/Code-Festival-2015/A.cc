@@ -31,7 +31,6 @@ int main() {
         REP(i, h) {
             puts(mp[i]);
         }
-
     return 0;
 }
 
