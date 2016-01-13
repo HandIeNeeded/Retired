@@ -50,8 +50,6 @@ int main() {
             if (!find) puts("NO");
         }
     }
-
-
     return 0;
 }
 
