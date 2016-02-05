@@ -10,11 +10,9 @@ typedef long long LL;
 #define REP(i, a) REPP(i, 0, (a) - 1)
 #define REPP(i, a, b) for (int i = int(a); i <= int(b); i++)
 const int N = 505;
-int mp[N][N], col[N];
-int n, m;
+int mp[N][N], cnt[N], col[N], n, m;
 
 bool dfs(int x, int c = 0) {
-    //cout << x << "hehe" << endl;
     bool bad = 1;
     REPP(i, 1, n) if (x != i && mp[x][i] == 0) {
         if (col[i] != 2) {
@@ -27,8 +25,6 @@ bool dfs(int x, int c = 0) {
     }
     return bad;
 }
-
-int cnt[N];
 
 int main() {
 #ifdef HOME
@@ -52,15 +48,29 @@ int main() {
         col[i] = 0;
         good &= dfs(i);
     }
+    if (good) {
+        REPP(i, 1, n) {
+            REPP(j, i + 1, n) {
+                if (col[i] == 2) {
+                    if (!mp[i][j]) good = 0;
+                }
+                else if ((col[i] ^ col[j]) == 1) {
+                    if (mp[i][j]) good = 0;
+                }
+            }
+        }
+    }
     !good ? puts("No") : puts("Yes");
     if (good) {
         REPP(i, 1, n) {
             if (col[i] == 2) {
                 cout << 'b';
             }
+            else if (col[i] == 0) {
+                cout << 'a';
+            }
             else {
-                if (col[i]) cout << 'a';
-                else cout << 'c';
+                cout << 'c';
             }
         }
         cout << endl;
