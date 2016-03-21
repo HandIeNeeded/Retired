@@ -15,7 +15,7 @@ int main() {
 	ios :: sync_with_stdio(0);
     //freopen("tmp.in", "w", stdout);
 	srand(time(0) % clock());
-	int n = rand() % 500 + 3;
+	int n = rand() % 20 + 3;
 	cout << n << endl;
 	REP(i, n) {
         cout << (rand() & 1 ? '(' : ')');

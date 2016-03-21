@@ -204,6 +204,7 @@ int main() {
         //cout << i << ' ' << ql << ' ' << qr << endl;
         if (ql > qr) continue;
         ans += query(head[qr], head[ql - 1], id[pos - 1], 1, tot);
+        //cout << ans << endl;
     }
     cout << ans << endl;
     return 0;
