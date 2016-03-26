@@ -18,7 +18,7 @@ int main() {
 	int n = rand() % 20 + 3;
 	cout << n << endl;
 	REP(i, n) {
-        cout << (rand() & 1 ? '(' : ')');
+        cout << rand() % 100 << ' ';
     }
     cout << endl;
 	return 0;

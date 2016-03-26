@@ -1,37 +1,55 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+
+#define FI(i,a,b) for(int i=(a);i<=(b);i++)
+#define FD(i,a,b) for(int i=(a);i>=(b);i--)
+
+#define PII pair<int,int>
+#define mp make_pair
+#define fi first
+#define se second
+
 using namespace std;
-typedef long long LL;
-#define REP(i, a) REPP(i, 0, (a) - 1)
-#define REPP(i, a, b) for (int i = int(a); i <= int(b); i++)
 
-bool check(string s) {
-    if (s.size() & 1) return 0;
-    int now = 0;
-    REP(i, s.size()) {
-        if (s[i] == '(') now++;
-        else now--;
-        if (now < 0) return 0;
-    }
-    return now == 0;
+int n,s[150005],res;
+
+bool ok(int x){
+  if(x<=0 || x>=n) return true;
+  if(x%2==1) return s[x]<s[x+1];
+  else return s[x]>s[x+1];
 }
 
-int main() {
-#ifdef HOME
-    string file(__FILE__);
-    freopen((file.substr(0, file.find('.')) + ".in").c_str(), "r", stdin);
-#endif
+vector<int> cand;
 
-    set<string> good;
-    int n;
-    string s;
-    cin >> n >> s;
-    REP(i, n) {
-        REPP(j, i + 1, n - 1) {
-            string tmp = s.substr(i, j - i + 1);
-            if (check(tmp)) good.insert(tmp);
-        }
-    }
-    cout << good.size() << endl;
+map<PII,bool> M;
+
+int main(){
+  scanf("%d",&n);
+  FI(i,1,n) scanf("%d",&s[i]);
+  FI(i,1,n) if(!ok(i)) cand.push_back(i);
+  if(cand.size()>=6){
+    printf("0\n");
     return 0;
+  }
+  FI(i,0,(int)cand.size()-1){
+   FI(u,0,1){
+    FI(j,1,n){
+      int a=j,b=cand[i]+u;
+      if(a>b) swap(a,b);
+      if(b>n || a==b || M.count(mp(a,b))) continue;
+      M[mp(a,b)]=true;
+      
+      swap(s[a],s[b]);
+      bool work=true;
+      FI(k,0,1){
+        if(!ok(a-k)) work=false;
+        if(!ok(b-k)) work=false;
+        FI(l,0,(int)cand.size()-1) if(!ok(cand[l]-k)) work=false;
+      }
+      if(work) res++;
+      swap(s[a],s[b]);
+    }
+   }
+  }
+  printf("%d\n",res);
+  return 0;
 }
-

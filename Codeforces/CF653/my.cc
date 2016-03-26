@@ -191,7 +191,7 @@ int main() {
         int lcp = h[i];
         int pos = sa[i] + 1;
         //cout << "pos: " << pos << ' ' << prefix[pos] << endl;
-        int lo = pos + 1, hi = n + 1;
+        int lo = pos, hi = n + 1;
         while (lo + 1 < hi) {
             int mid = (lo + hi) >> 1;
             ql = pos + 1, qr = mid;

@@ -11,11 +11,7 @@ typedef long long LL;
 #define REPP(i, a, b) for (int i = int(a); i <= int(b); i++)
 
 int main() {
-#ifdef HOME
-    string file(__FILE__);
-    freopen((file.substr(0, file.find('.')) + ".in").c_str(), "r", stdin);
-#endif
-    
+    std::ios::sync_with_stdio(0);
     
 
 
