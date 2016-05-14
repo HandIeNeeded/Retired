@@ -72,7 +72,7 @@ void show(Node *u) {
   if (u == null) return ;
   else {
     show(u->l);
-    printf("value: %d\n", numbers[u->value - 1]);
+    //printf("value: %d\n", numbers[u->value - 1]);
     show(u->r);
   }
 }
@@ -89,6 +89,7 @@ Node* erase(Node *&u, int s) {
   int tmp = find(u, s);
   PNN res = split(u, tmp - 1);
   PNN ans = split(res.second, 1);
+  assert(ans.first->value == s);
   u = merge(res.first, ans.second);
   return ans.first;
 }
@@ -148,8 +149,6 @@ int main() {
   }
   sort(numbers.begin(), numbers.end());
   numbers.resize(unique(numbers.begin(), numbers.end()) - numbers.begin());
-  int tot = numbers.size();
-  cerr << tot << endl;
   REPP(i, 1, n) {
     b[i] = lower_bound(numbers.begin(), numbers.end(), b[i]) - numbers.begin() + 1;
     c[i] = lower_bound(numbers.begin(), numbers.end(), c[i]) - numbers.begin() + 1;
@@ -159,11 +158,11 @@ int main() {
   REPP(i, 1, n) {
     if (a[i] == 1) {
       Add(b[i], c[i]);
-      show(rt[b[i]]);
+      //show(rt[b[i]]);
     }
     else if (a[i] == 2) {
       Erase(b[i], c[i]);
-      show(rt[b[i]]);
+      //show(rt[b[i]]);
     }
     else {
       printf("%d\n", Query(b[i], c[i]));

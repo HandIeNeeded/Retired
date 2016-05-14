@@ -1,3 +1,17 @@
+/*************************************************************************
+  > File Name: C.cc
+  > Author: yuzhou627
+  > Mail:   yuzhou627@gmail.com
+  > Created Time: Sat 14 May 2016 01:23:26 PM CST
+ *************************************************************************/
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+typedef long long LL;
+#define REP(i, a) REPP(i, 0, (a) - 1)
+#define REPP(i, a, b) for (int i = int(a); i <= int(b); i++)
+using namespace std;
 const LL BASE = 1e9;
 
 struct BigInteger {
@@ -95,3 +109,20 @@ void output(const BigInteger &num) {
   }
   cout << endl;
 }
+
+BigInteger answer[201];
+
+void Init() {
+  answer[1] = BigInteger(1), answer[2] = BigInteger(2);
+  for (int i = 3; i <= 200; i++) answer[i] = answer[i - 1] + answer[i - 2];
+}
+
+int main() {
+  int t, ca = 1;
+  Init();
+  while (cin >> t) {
+    output(answer[t]);
+  }
+  return 0;
+}
+

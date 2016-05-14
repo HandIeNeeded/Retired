@@ -1,8 +1,8 @@
 using namespace __gnu_cxx;
 struct myhash{
-    inline unsigned LL operator() (pair<int, int> a) const {
-        return a.first * 1234567891ULL + a.second;
-    }
+  inline unsigned LL operator() (pair<int, int> a) const {
+    return a.first * 1234567891ULL + a.second;
+  }
 };
 hash_map<pair<int, int>, int, myhash> mp;
 

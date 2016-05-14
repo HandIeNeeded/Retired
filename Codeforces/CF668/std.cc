@@ -1,32 +1,46 @@
 #include <bits/stdc++.h>
-typedef long long LL;
-#define REP(i, a) REPP(i, 0, (a) - 1)
-#define REPP(i, a, b) for (int i = int(a); i <= int(b); i++)
-using namespace std;
 
-const int N = 100000;
-multiset<int> s[N];
+const int N = 100000 + 5;
+int A[N],T[N],X[N];
+int answer[N];
+int idx[N];
+int n;
 
-int main() {
-    int n;
-    cin >> n;
-    REP(i, n) {
-      int a, b, c;
-      cin >> a >> b >> c;
-      if (a == 1) {
-        REPP(i, b, 20) s[i].insert(c);
-      }
-      else if (a == 2) {
-        REPP(i, b, 20) {
-          auto pos = s[i].find(c);
-          if (pos != s[i].end()) s[i].erase(pos);
+void divide(int l,int r) {
+    if (l == r) return ;
+    int mid = l + r >> 1;
+    divide(l,mid);
+    divide(mid + 1,r);
+
+    std::map<int,int> map;
+    for (int i = mid + 1,j = l; i <= r; ++ i) {
+        while (j <= mid && T[idx[j]] <= T[idx[i]]) {
+            if (A[idx[j]] == 1) {
+                map[X[idx[j]]] ++;
+            } else if (A[idx[j]] == 2) {
+                map[X[idx[j]]] --;
+            }
+            ++ j;
         }
-      }
-      else {
-        cout << s[b].count(c) << endl;
-      }
+        if (A[idx[i]] == 3) {
+            answer[idx[i]] += map[X[idx[i]]];
+        }
     }
-    return 0;
+    std::inplace_merge(idx + l,idx + mid + 1,idx + r + 1,[&](int a,int b) {
+            return T[a] < T[b];
+    });
 }
 
-
+int main() {
+    scanf("%d",&n);
+    for (int i = 0; i < n; ++ i) {
+        scanf("%d%d%d",A + i,T + i,X + i);
+        idx[i] = i;
+    }
+    divide(0,n - 1);
+    for (int i = 0; i < n; ++ i) {
+        if (A[i] == 3) {
+            printf("%d\n",answer[i]);
+        }
+    }
+}
