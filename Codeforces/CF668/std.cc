@@ -27,7 +27,7 @@ void divide(int l,int r) {
         }
     }
     std::inplace_merge(idx + l,idx + mid + 1,idx + r + 1,[&](int a,int b) {
-            return T[a] < T[b];
+      return T[a] < T[b];
     });
 }
 
