@@ -19,3 +19,21 @@ public:
       return -1;
     }
 };
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+      int n = nums.size();
+      int lo = 0, hi = n - 1;
+      while (lo + 1 < hi) {
+        int mid = (lo + hi) >> 1;
+        int count = 0;
+        for (auto &x: nums) {
+          if (x <= mid) count++;
+        }
+        if (count > mid) hi = mid;
+        else lo = mid;
+      }
+      return hi;
+    }
+};

@@ -1,3 +1,15 @@
+/*************************************************************************
+	> File Name: test.cc
+	> Author: yuzhou627
+	> Mail:   yuzhou627@gmail.com
+	> Created Time: Sun 15 May 2016 09:09:55 PM CST
+*************************************************************************/
+#include <bits/stdc++.h>
+typedef long long LL;
+#define REP(i, a) REPP(i, 0, (a) - 1)
+#define REPP(i, a, b) for (int i = int(a); i <= int(b); i++)
+using namespace std;
+
 // base and base_digits must be consistent
 const int base = 1000000000;
 const int base_digits = 9;
@@ -131,6 +143,7 @@ struct bigint {
   }
 
   bigint operator/(int v) const {
+    cout << "hehe" << ' ' << v << endl;
     bigint res = *this;
     res /= v;
     return res;
@@ -344,4 +357,18 @@ struct bigint {
     return res;
   }
 };
+
+int main() {
+  int t, ca = 1;
+  cin >> t;
+  while (t--) {
+    bigint a, b;
+    cin >> a >> b;
+    LL x = 1LL << 40 - 1;
+    cout << a / x << endl;
+  }
+  return 0;
+}
+
+
 
