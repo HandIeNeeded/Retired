@@ -13,7 +13,7 @@ now.set(); now.set(2); now.set(2, 0); now.reset(); now.reset(2);
 now.to_string(); now.to_ullong();
 
 //a[5] is the 6th 
-nth_element(a.begin(), a.begin() + 6, a.end())
+  nth_element(a.begin(), a.begin() + 6, a.end())
 nth_element(a.begin(), a.begin() + 6, a.end(), cmp)
 
 
