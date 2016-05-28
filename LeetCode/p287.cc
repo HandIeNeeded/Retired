@@ -1,11 +1,11 @@
 /*************************************************************************
-	> File Name: p287.cc
-	> Author: yuzhou627
-	> Mail:   yuzhou627@gmail.com
-	> Created Time: Thu 12 May 2016 08:00:09 PM CST
-*************************************************************************/
+  > File Name: p287.cc
+  > Author: yuzhou627
+  > Mail:   yuzhou627@gmail.com
+  > Created Time: Thu 12 May 2016 08:00:09 PM CST
+ *************************************************************************/
 class Solution {
-public:
+  public:
     int findDuplicate(vector<int>& nums) {
       int n = nums.size();
       for (int i = 0; i < n; i++) {
@@ -21,7 +21,7 @@ public:
 };
 
 class Solution {
-public:
+  public:
     int findDuplicate(vector<int>& nums) {
       int n = nums.size();
       int lo = 0, hi = n - 1;
