@@ -1,6 +1,6 @@
 while true; do
     ./gen > data.in
-    python std.py < data.in > std.out
+    ./std < data.in > std.out
     ./my  < data.in > my.out
 
     diff my.out std.out > /dev/null
