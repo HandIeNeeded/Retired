@@ -1,17 +1,16 @@
 /*************************************************************************
-	> File Name: B.cc
+	> File Name: C.cc
 	> Author: yuzhou627
 	> Mail:   yuzhou627@gmail.com
-	> Created Time: Sun 29 May 2016 05:25:43 PM CST
+	> Created Time: Sun 29 May 2016 07:05:25 PM CST
 *************************************************************************/
 #include <bits/stdc++.h>
 typedef long long LL;
 #define REP(i, a) REPP(i, 0, (a) - 1)
 #define REPP(i, a, b) for (int i = int(a); i <= int(b); i++)
 using namespace std;
-
-const int N = 105;
-int a[N], b[N];
+const int N = 1e5 + 5;
+int a[N];
 
 int main() {
   ios::sync_with_stdio(0);
@@ -22,31 +21,27 @@ int main() {
   int t, ca = 1;
   cin >> t;
   while (t--) {
-    int n, m;
-    cin >> n >> m;
-    REP(i, n) cin >> a[i];
-    REP(j, m) cin >> b[j];
-    sort(a, a + n), sort(b, b + m);
-    string str;
-    cin >> str;
-    int now = 0;
-    int idx = 0;
+    int n;
+    cin >> n;
+    int mi = INT_MAX;
+    REP(i, n) {
+      cin >> a[i];
+      mi = min(mi, a[i]);
+    }
     int answer = 0;
-    REP(i, str.size()) {
-      if (str[i] == '-') {
-        if (now >= b[idx]) {
-          now -= b[idx++];
-        }
-        else {
-          answer++;
-        }
-      }
-      else {
-        now += a[--n];
-      }
+    for (int i = 1; i * i <= mi; i++) if (mi % i == 0) {
+      int gcd = 0;
+      REP(j, n) if (a[j] % i) gcd = __gcd(gcd, a[j]);
+      if (gcd == 0) gcd = i;
+      answer = max(answer, min(gcd, i));
+      gcd = 0;
+      REP(j, n) if (a[j] % (mi / i)) gcd = __gcd(gcd, a[j]);
+      if (gcd == 0) gcd = mi / i;
+      answer = max(answer, min(gcd, mi / i));
     }
     cout << answer << endl;
   }
+
   return 0;
 }
 

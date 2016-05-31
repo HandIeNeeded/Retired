@@ -47,9 +47,7 @@ int main() {
     cin >> n;
     REP(i, 3) {
       REP(j, n) {
-        int x;
-        cin >> x;
-        x--;
+        int x; cin >> x; x--;
         a[i][x] = j;
       }
     }
