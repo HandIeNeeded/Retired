@@ -1,12 +1,10 @@
-swap :: (Num a) => (a, b) -> (b, a)
-swap (x, y) = (y, x)
+#!/usr/bin/env runhaskell
 
-power :: (Num a) => a -> Int -> a
-power _ 0 = 1
-power x y = if odd y 
-            then power (x * x) (y `div` 2) * x
-            else power (x * x) (y `div` 2)
+bimTell :: (RealFloat a) => a -> a -> String
 
-qsort :: Ord a => [a] -> [a]
-qsort [] = []
-qsort xs = qsort [x | x <- tail xs, x < head xs] ++ [head xs] ++ qsort [x | x <- tail xs, x >= head xs]
+bimTell weight height 
+  | bim <= skinny = "Shin!!!"
+  | bim <= normal = "Normal!!!"
+  | bim <= fat = "Fat!!!"
+  | otherwise = "Whale!!!"
+  where (bim, skinny, normal, fat) = (weight / height ^ 2, 18.5, 25.0, 30.0)
