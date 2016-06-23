@@ -69,6 +69,7 @@ int main() {
 
     result = 1LL * result * C(p, i) % MO;
     result = 1LL * result * fac[women] % MO * fac[man] % MO;
+    result = 1LL * fac[i] * result % MO;
     add(answer, result);
   }
   cout << answer << endl;
