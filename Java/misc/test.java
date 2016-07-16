@@ -32,6 +32,9 @@ public class test {
     System.out.println("Dog name is " + dog.GetName());
     dog.SetName("null");
     System.out.println("Dog name is " + dog.GetName());
+    System.out.println("hehe");
+    System.out.append("lala");
+    System.out.append("hehe");
   }
 }
 

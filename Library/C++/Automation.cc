@@ -1,5 +1,5 @@
 struct Automation{
-  int tr[N * LEN][Z], fail[N * LEN], node;
+  int tr[N][Z], fail[N], val[N], node;
 
   int Node() {
     memset(tr[node], 0, sizeof(tr[node]));
@@ -12,18 +12,19 @@ struct Automation{
     Node();
   }
 
-  void insert(char *s, int id) {
+  void Insert(char *s, int y) {
     int pos = 0, x, now = 0;
     while (s[pos]) {
-      x = str.find(s[pos++]);
+      x = s[pos++] - 'a';
       if (!tr[now][x]) {
         tr[now][x] = Node();
       }
       now = tr[now][x];
     }
+    val[now] = y;
   }
 
-  void getfail() {
+  void Build() {
     int x, y;
     queue<int> q;
     REP(i, Z) {
@@ -44,7 +45,9 @@ struct Automation{
         y = tr[x][i];
         q.push(y);
         fail[y] = tr[fail[x]][i];
+        val[y] += val[fail[y]];
       }
     }
   }
 }AC;
+
