@@ -1,10 +1,4 @@
-import java.lang.Object;
-import javafx.util.Pair;
-
-/**
- * Created by yuzhou627 on 7/14/16.
- */
-public class TreapSolver {
+static class TreapSolver {
   class Node {
     int value, size;
     Node left, right;
@@ -45,6 +39,4 @@ public class TreapSolver {
     //if (a == null) return Pair((Node) null, (Node) null);
 
   }
-
-
 }

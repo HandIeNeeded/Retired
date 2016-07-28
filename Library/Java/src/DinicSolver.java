@@ -1,9 +1,4 @@
-/**
- * Created by yuzhou627 on 7/13/16.
- */
-import java.util.*;
-
-public class DinicSolver {
+static class DinicSolver {
   static int N = 100005, M = 100005, INF = 0x3f3f3f3f;
   int[] first, next, end, cap, current, level;
   int source, sink, edge;

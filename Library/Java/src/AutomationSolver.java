@@ -1,9 +1,4 @@
-/**
- * Created by yuzhou627 on 7/13/16.
- */
-import java.util.*;
-
-public class AutomationSolver {
+static class AutomationSolver {
   public static int N = 10005, LEN = 10, Z = 26;
   int[][] trie;
   int[] fail;
