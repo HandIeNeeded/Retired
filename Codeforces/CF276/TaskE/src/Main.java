@@ -59,7 +59,7 @@ public class Main {
           next[j][i] = next[next[j][i - 1]][i - 1];
         }
       }
-      int result = 0;
+      int answer = 0;
       while (q-- > 0) {
         int type = in.nextInt();
         if (type == 0) {
@@ -69,12 +69,12 @@ public class Main {
           distance = in.nextInt();
           //out.println("Type " + type + " query");
           if (node == 1) {
-            result += value;
+            answer += value;
             B.add(distance, value);
             continue;
           }
           if (depth[node] <= distance) {
-            result += value;
+            answer += value;
             if (distance > depth[node]) B.add(distance - depth[node], value);
             else {
               int up = go(node, distance - 1);
@@ -103,7 +103,7 @@ public class Main {
           int node = in.nextInt();
           //out.println("Type " + type + " query");
           if (node == 1) {
-            out.println(result);
+            out.println(answer);
             continue;
           }
           int answer = 0;
