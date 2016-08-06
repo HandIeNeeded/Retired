@@ -28,7 +28,7 @@ public class Main {
         int x = in.nextInt(), y = in.nextInt();
         x--; y--;
         Queue<Integer> q = new LinkedList<>();
-        q.add(x); q.add(y);
+        q.offer(x); q.offer(y);
         dp[i][x][y] = 0; vis[i][x][y] = 1;
         while (!q.isEmpty()) {
           x = q.poll(); y = q.poll();
@@ -38,8 +38,8 @@ public class Main {
             if (valid(tx, ty, n, m) && vis[i][tx][ty] == 0) {
               vis[i][tx][ty] = 1;
               dp[i][tx][ty] = dp[i][x][y] + 1;
-              q.add(tx);
-              q.add(ty);
+              q.offer(tx);
+              q.offer(ty);
             }
           }
         }
