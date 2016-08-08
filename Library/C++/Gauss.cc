@@ -18,3 +18,28 @@ void Gauss(Matrix& a, int n){
     a[i][n] /= a[i][i];
   }
 }
+
+//Gauss Elimination
+int Gauss(int n) {
+  int rank = 0;
+  for (int i = 0; i < K; i++) {
+    bool find = 0;
+    for (int j = rank; j < n; j++) {
+      if (a[j] & (1LL << i)) {
+        find = 1;
+        swap(a[rank], a[j]);
+        break;
+      }
+    }
+    if (find) {
+      for (int j = 0; j < n; j++) if (j != rank) {
+        if (a[j] & (1LL << i)) {
+          a[j] ^= a[rank];
+        }
+      }
+      rank++
+    }
+  }
+  return rank;
+}
+
