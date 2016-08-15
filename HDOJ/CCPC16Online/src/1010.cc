@@ -12,9 +12,17 @@ const int N = 1e5 + 5;
 const int K = 20;
 const int L = 16;
 
-int tr[N * K][2], node;
+int tr[N * K * K][2], node;
 int rt[N], idx[N], res[N], ans[N];
-vector<int> numbers[N], edges[N];
+vector<int> numbers[N];
+
+int first[N], to[N << 1], nex[N << 1], edge;
+
+void Add(int x, int y) {
+  nex[++edge] = first[x];
+  first[x] = edge;
+  to[edge] = y;
+}
 
 int Node() {
   tr[node][0] = tr[node][1] = 0;
@@ -62,43 +70,78 @@ int Merge(int a, int b) {
 }
 
 void dfs(int x, int p) {
-  for (auto &y: edges[x]) if (y != p) {
+  for (int go = first[x]; go; go = nex[go]) {
+    int y = to[go];
+    if (y == p) continue;
     dfs(y, x);
     idx[x] = Merge(x, y);
   }
   ans[x] = numbers[idx[x]].size() > 1 ? res[idx[x]] : -1;
 }
 
+int in() {
+  char c;
+  while (c = getchar(), (c < '0' || c > '9') && (c != '-'));
+  bool flag = (c == '-');
+  if (flag) c = getchar();
+  int x = 0;
+  while (c >= '0' && c <= '9') {
+    x = x * 10 + c - 48;
+    c = getchar();
+  }
+  return flag ? -x : x;
+}
+
+void out(int x) { //int
+  if (x < 0) putchar('-'), x = -x;
+  int len = 0, bit[10]; // LL  -> bit[20]
+  while (x) {
+    bit[len++] = x % 10;
+    x /= 10;
+  }
+  if (!len) bit[len++] = 0;
+  while (len--) putchar(bit[len] + 48);
+  putchar('\n');
+}
+
 int main() {
   int t, ca = 1;
-  scanf("%d", &t);
+  t = in();
+  //scanf("%d", &t);
   while (t--) {
     int n;
-    scanf("%d", &n);
+    n = in();
+    //scanf("%d", &n);
     Init(n);
+    edge = 0;
     for (int i = 1; i <= n; i++) {
       int x;
-      scanf("%d", &x);
+      x = in();
+      //scanf("%d", &x);
       idx[i] = i;
       res[i] = 0;
-      edges[i].clear();
+      first[i] = 0;
       numbers[i].clear();
       Insert(idx[i], x);
     }
     for (int i = 0; i < n - 1; i++) {
       int x, y;
-      scanf("%d%d", &x, &y);
-      edges[x].push_back(y);
-      edges[y].push_back(x);
+      x = in(), y = in();
+      //scanf("%d%d", &x, &y);
+      Add(x, y);
+      Add(y, x);
     }
     dfs(1, 0);
     int q;
-    scanf("%d", &q);
+    q = in();
+    //scanf("%d", &q);
     printf("Case #%d:\n", ca++);
     while (q--) {
       int x;
-      scanf("%d", &x);
-      printf("%d\n", ans[x]);
+      x = in();
+      //scanf("%d", &x);
+      out(ans[x]);
+      //printf("%d\n", ans[x]);
     }
   }
   return 0;
