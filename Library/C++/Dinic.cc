@@ -1,10 +1,10 @@
-template<int NODE, int EDGE, typename Type, Type INF>
+template<int N, int E, typename Type, Type INF>
 class MaxFlow {
 public:
   int edge, source, sink;
-  int level[NODE], current[NODE];
-  int first[NODE], next[EDGE << 1], to[EDGE << 1];
-  Type cap[EDGE << 1];
+  int level[N], current[N];
+  int first[N], next[E << 1], to[E << 1];
+  Type cap[E << 1];
 
   void Init(int S, int T) {
     source = S, sink = T;
@@ -32,7 +32,7 @@ public:
 
 private:
   bool Bfs() {
-    queue<int> q;
+    std::queue<int> q;
     memset(level, 0, sizeof(level));
     q.push(source), level[source] = 1;
     while(q.size()) {
@@ -51,7 +51,7 @@ private:
     Type ans = 0, tmp;
     for (int &go = current[x]; go; go = next[go]) if (cap[go] > 0) {
       int y = to[go];
-      if (level[y] == level[x] + 1 && (tmp = Dfs(y, min(flow, cap[go]))) > 0) {
+      if (level[y] == level[x] + 1 && (tmp = Dfs(y, std::min(flow, cap[go]))) > 0) {
         ans += tmp, flow -= tmp;
         cap[go] -= tmp, cap[go ^ 1] += tmp;
         if (flow == 0) break;

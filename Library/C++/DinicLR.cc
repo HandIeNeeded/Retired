@@ -52,8 +52,8 @@ private:
   }
 
   bool Bfs(int source, int sink) {
-    queue<int> q;
-    fill(level, level + node, 0);
+    std::queue<int> q;
+    std::fill(level, level + node, 0);
     q.push(source), level[source] = 1;
     while(q.size()) {
       int x = q.front(); q.pop();
@@ -80,4 +80,5 @@ private:
     return ans;
   }
 };
+
 MaxFlow<N, N, int, 1 << 30> net;

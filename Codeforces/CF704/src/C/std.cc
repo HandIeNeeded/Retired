@@ -78,7 +78,6 @@ int main() {
     result <<= 1;
     if (result >= MO) result -= MO;
   }
-  cerr << "Step 1: " << answer[0] << ' ' << answer[1] << ' ' << result << endl;
   //1.5 start with self loop 
   for (int i = 1; i <= n; i++) if (marked[i] && visited[i] == 1) {
     int edge, type;
@@ -142,7 +141,6 @@ int main() {
       }
     }
   }
-  cerr << "Step 1.5: " << answer[0] << ' ' << answer[1] << ' ' << result << endl;
   
   //2. start with only one edge, straight line  x <-> y <-> ... <-> z
   //dp[x][2][2] all xor result, last value
@@ -188,7 +186,6 @@ int main() {
       Add(answer[k], 1LL * tmp[1] * (dp[x][1 ^ k][0] + dp[x][1 ^ k][1]) % MO);
     }
   }
-  cerr << "Step 2: " << answer[0] << ' ' << answer[1] << ' ' << result << endl;
   //3. circle
   //dp as previous
   for (int i = 1; i <= n; i++) if (visited[i] == 1 && edges[i].size() == 2u) {
@@ -250,8 +247,6 @@ int main() {
       }
     }
   }
-  cerr << "Step 3: " << answer[0] << ' ' << answer[1] << ' ' << result << endl;
-  cerr << "has: " << has << endl;
   
   cout << 1LL * result * answer[has] % MO << endl;
   return 0;
