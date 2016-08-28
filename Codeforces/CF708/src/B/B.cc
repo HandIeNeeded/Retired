@@ -37,7 +37,7 @@ int main() {
     std::cout << std::string(x, '0') << std::endl;
     exit(0);
   } else if (sum == a[1][1]) {
-    std::cout << std::string(x, '1') << std::endl;
+    std::cout << std::string(y, '1') << std::endl;
     exit(0);
   } else {
     std::cerr << x << ' ' << y << std::endl;
