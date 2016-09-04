@@ -12,7 +12,7 @@ void in(T& x) {
 template<class T>
 void out(T x) {
   if (x < 0) putchar('-'), x *= -1;
-  static int length = 0, bit[20];
+  int length = 0, bit[20];
   for (; x > 0; x /= 10) bit[length++] = x % 10;
   if (!length) bit[length++] = 0;
   while (length--) putchar(bit[length] + '0');
