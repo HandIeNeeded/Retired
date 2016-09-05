@@ -20,8 +20,7 @@ int main() {
   LL answer = 1LL << 60;
   for (int itr = 0; itr < n; itr++) {
     for (int i = 0; i < n; i++) b[(i + itr) % n] = std::min(b[(i + itr) % n], 1LL * a[i]);
-    LL sum = 0;
-    for (int i = 0; i < n; i++) sum += b[i];
+    LL sum = std::accumulate(b, b + n, 0LL);
     answer = std::min(answer, sum + 1LL * itr * x);
   }
   std::cout << answer << std::endl;
