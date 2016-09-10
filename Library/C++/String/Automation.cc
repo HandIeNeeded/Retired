@@ -8,10 +8,9 @@ private:
     Node* son[char_size];
     Node* failptr;
     value_type value;
-    Node() {
+    Node(): failptr(nullptr), value(0) {
       exist.reset();
       std::fill(son, son + char_size, nullptr);
-      failptr = nullptr; value = 0;
     }
   };
   Node *rt, *ptr, pool[total_size];
@@ -80,9 +79,9 @@ public:
     }
   }
 };
+Automation<100000, 26, int> ac;
 
 int main() {
-  Automation<100000, 26, int> ac;
   ac.Init();
   return 0;
 }
