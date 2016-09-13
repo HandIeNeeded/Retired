@@ -1,21 +1,22 @@
-#include <bits/stdc++.h>
-
 template<int total_size, int char_size, class value_type>
 class Automation {
 private:
   struct Node {
     std::bitset<char_size> exist;
-    Node* son[char_size];
-    Node* failptr;
+    using NodePtr = Node*;
+    NodePtr son[char_size];
+    NodePtr failptr;
     value_type value;
     Node(): failptr(nullptr), value(0) {
       exist.reset();
       std::fill(son, son + char_size, nullptr);
     }
   };
-  Node *rt, *ptr, pool[total_size];
+  using NodePtr = Node*;
+  Node pool[total_size];
+  NodePtr rt, ptr;
 
-  Node* GetNode() {
+  NodePtr GetNode() {
     return new (ptr++) Node();
   }
 
@@ -30,7 +31,7 @@ public:
   }
 
   bool Insert(const std::string& str, value_type v = 1) {
-    Node* now = rt;
+    NodePtr now = rt;
     bool has = true;
     for (auto c: str) {
       int x = Index(c);
@@ -46,7 +47,7 @@ public:
   }
 
   value_type Find(const std::string& str) {
-    Node* now = rt;
+    NodePtr now = rt;
     value_type answer = 0;
     for (auto c: str) {
       int x = Index(c);
@@ -57,7 +58,7 @@ public:
   }
 
   void Build() {
-    std::queue<Node*> q;
+    std::queue<NodePtr> q;
     for (int i = 0; i < char_size; i++) {
       if (rt->exist.test(i)) {
         rt->son[i]->failptr = nullptr;
@@ -79,9 +80,4 @@ public:
     }
   }
 };
-Automation<100000, 26, int> ac;
 
-int main() {
-  ac.Init();
-  return 0;
-}
