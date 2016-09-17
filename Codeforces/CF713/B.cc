@@ -6,11 +6,15 @@
 *************************************************************************/
 #include <bits/stdc++.h>
 int count;
+int X[2][2], Y[2][2];
 
 void Ask(int a, int b, int c, int d) {
   std::cout << "? " << a << ' ' << b << ' ' << c << ' ' << d << std::endl;
-  fflush(stdout);
   std::cin >> count;
+}
+
+void Print(int x) {
+  std::cout << ' ' << X[x][0] << ' ' << Y[x][0] << ' ' << X[x][1] << ' ' << Y[x][1];
 }
 
 int GetUpBound(int l, int r, int down, int up) {
@@ -63,7 +67,6 @@ int main() {
   std::cin >> n;
   //step 1, get bound | or --
   int rowBound = 0, columnBound = 0;
-  int X[2][2], Y[2][2];
 
   //try |
   bool find = 0;
@@ -75,7 +78,10 @@ int main() {
     else lo = mid;
   }
   Ask(1, 1, hi, n);
-  if (count == 1) find = 1, columnBound = hi;
+  if (count == 1) {
+    Ask(hi + 1, 1, n, n);
+    if (count == 1) find = 1, columnBound = hi;
+  }
   //try --
   if (!find) {
     int lo = 0, hi = n;
@@ -110,7 +116,8 @@ int main() {
     Y[1][1] = GetUpBound(X[1][0], X[1][1], 1, n);
   }
 
-  std::cout << "! " << X[0][0] << ' ' << Y[0][0] << ' ' << X[0][1] << ' ' << Y[0][1] << ' ' << 
-    X[1][0] << ' ' << Y[1][0] << ' ' << X[1][1] << ' ' << Y[1][1] << std::endl;
+  std::cout << "!";
+  Print(0), Print(1);
+  std::cout << std::endl;
   return 0;
 }
