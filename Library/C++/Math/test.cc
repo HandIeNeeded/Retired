@@ -102,6 +102,11 @@ namespace PR {
   }
 }
 
+namespace GM {
+  using LL = long double;
+  using Point = std::complex<LL>;
+}
+
 int main() {
   std::ios::sync_with_stdio(0);
   std::cerr << "---------------------------" << std::endl;
@@ -115,5 +120,11 @@ int main() {
   for (int i = 0; i < 5; ++i) {
     std::cout << FC::C(5, i) << std::endl;
   }
+  GM::Point A, B;
+  std::cin >> A;
+  std::cout << std::real(A) << ' ' << B << std::endl;
+  std::cout << std::conj(A) << ' ' << std::conj(B) << std::endl;
+  std::cout << 2.L * A << ' ' << A * 2.L << std::endl;
+  std::cout << std::abs(A) << std::endl;
   return 0;
 }

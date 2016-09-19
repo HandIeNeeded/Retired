@@ -1,10 +1,8 @@
 using LL = long long; 
 template<int BASE = 5>
 class NS {
-  static const LL MO = 1e9 + 7;
-  LL a, b; //Number System of BASE: a + b * sqrt(BASE);
-
 public:
+  static const LL MO = 1e9 + 7;
   static inline void Normalize(LL& x) { x %= MO; if (x < 0) x += MO; }
   inline LL first() const { return a; }
   inline LL second() const { return b; }
@@ -28,7 +26,7 @@ public:
     return os;
   }
 
-  NS Pair() const { return NS(a, -b); }
+  NS Conjugate() const { return NS(a, -b); }
 
   NS Inverse() const {
     if (!a && !b) {
@@ -38,7 +36,7 @@ public:
       return NS(Powd(a, MO - 2), 0);
     } else {
       LL down = a * a % MO + MO - BASE * b % MO * b % MO;
-      return (*this).Pair() * Powd(down % MO, MO - 2);
+      return (*this).Conjugate() * Powd(down % MO, MO - 2);
     }
   }
 
@@ -48,6 +46,9 @@ public:
   NS operator * (const NS& rhs) const { return NS(a * rhs.a % MO + b * rhs.b % MO * BASE % MO, a * rhs.b % MO + b * rhs.a % MO); }
   NS operator * (LL scale) const { return *this * NS(scale, 0); }
   NS operator / (const NS& rhs) const { return *this * rhs.Inverse(); }
+
+private:
+  LL a, b; //Number System of BASE: a + b * sqrt(BASE);
 };
 using NS5 = NS<5>;
 
