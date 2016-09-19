@@ -80,5 +80,4 @@ private:
     return ans;
   }
 };
-
 MaxFlow<N, N, int, 1 << 30> net;
