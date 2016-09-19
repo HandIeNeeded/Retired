@@ -3,7 +3,7 @@
   >       Author: lyyllyyl
   >         Mail: riho.yoshioka@yandex.com
   > Created Time: Mon 19 Sep 2016 09:05:44 PM CST
-*************************************************************************/
+ *************************************************************************/
 #include <bits/stdc++.h>
 constexpr int N = 1e5 + 5;
 constexpr int M = 1e6 + 6;
@@ -50,7 +50,7 @@ int main() {
     }
     std::vector<int> indexs(q, 0), answer(q, 0);
     std::iota(indexs.begin(), indexs.end(), 0);
-        std::sort(indexs.begin(), indexs.end(), [] (int a, int b) {
+    std::sort(indexs.begin(), indexs.end(), [] (int a, int b) {
       return queries[a].second < queries[b].second;
     });
     std::fill(previous, previous + M, 0);
