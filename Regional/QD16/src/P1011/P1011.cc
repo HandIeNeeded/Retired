@@ -108,8 +108,10 @@ int main() {
     int distance = dp[0][n];
     for (int i = 0; i < m; ++i) {
       int x = A[i], y = B[i], z = C[i];
-      if (dp[0][x] + 1 + dp[1][y] == distance || dp[0][y] + 1 + dp[1][x] == distance) {
+      if (dp[0][x] + 1 + dp[1][y] == distance) {
         solver.Add(x, y, z);
+      }
+      if (dp[0][y] + 1 + dp[1][x] == distance) {
         solver.Add(y, x, z);
       }
     }
