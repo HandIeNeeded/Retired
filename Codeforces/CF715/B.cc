@@ -13,7 +13,7 @@ const int INF = 1e9 + 7;
 std::vector<std::pair<int, int>> edges[N];
 int n, m, L, first, last;
 int u[M], v[M], w[M], vis[N], pre[N];
-LL dp[N];
+LL dp[N], cnt[N];
 
 void NO() {
   std::cout << "NO" << std::endl;
@@ -32,11 +32,17 @@ void Dijkstra(int start, int cheat = INF) {
     if (vis[x]) continue;
     vis[x] = 1;
     for (auto &p: edges[x]) {
-      int y, v;
+      int y, v, add = 0;
       std::tie(y, v) = p;
-      if (v == 0) v = cheat;
+      if (v == 0) v = cheat, add = 1;
       if (dp[y] == -1 || dp[y] > dp[x] + v) {
         dp[y] = dp[x] + v;
+        cnt[y] = cnt[x] + add;
+        pre[y] = x;
+        q.emplace(dp[y], y);
+      }
+      else if (dp[y] == dp[x] + v && cnt[y] > cnt[x] + add) {
+        cnt[y] = cnt[x] + add;
         pre[y] = x;
         q.emplace(dp[y], y);
       }
@@ -83,6 +89,12 @@ int main() {
   std::cerr << "# dp[last] # is " << dp[last] << std::endl;
   if (dp[last] < 0 || dp[last] < L) {
     NO();
+  } else if (dp[last] == L) {
+    std::cout << "YES" << std::endl;
+    for (int i = 0; i < m; ++i) {
+      if (w[i] == 0) w[i] = INF;
+      std::cout << u[i] << ' '  << v[i] << ' ' << w[i] << std::endl;
+    }
   } else {
     Dijkstra(first, 1);
     if (dp[last] > L) NO();
