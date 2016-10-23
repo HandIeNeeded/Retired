@@ -19,12 +19,29 @@ public class Main {
     out.close();
   }
 
+  static class TestString {
+    String a;
+
+    public TestString (String s) {
+      a = s.toString();
+    }
+
+    //public String toString() {
+    //  return a;
+    //}
+  }
+
   static class TaskA {
     public void solve(int testNumber, InputReader in, PrintWriter out) {
       Integer a = 10;
       Integer b = a;
       b++;
       out.println(b + " " + a);
+      TestString A = new TestString("hehe");
+      TestString B = A;
+      out.println(A + " " + B);
+      B.a = new String("fuck");
+      out.println(A + " " + B);
     }
   }
 
