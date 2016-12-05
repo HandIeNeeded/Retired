@@ -1,3 +1,2 @@
 # Retired
 Algorithm 
-TopCoder
