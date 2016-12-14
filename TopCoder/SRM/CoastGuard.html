@@ -1,0 +1,31 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>If you look on a map of Foxland, you will notice that there is a sea to the north of Foxland.
+For the purpose of this problem, the coast is the straight line y = 0.
+The halfplane with y > 0 is the sea, and the opposite halfplane is Foxland.
+<br></br>
+<br></br>
+Fox Ciel is the commander of the Foxland Coast Guard (FCG).
+One day, a fleet of n enemy warships approached Foxland.
+Luckily, the FCG has exactly n cannons placed along the coast, so Ciel can attack each warship using a different cannon.
+<br></br>
+<br></br>
+You are given the coordinates of cannons and warships in the vector &lt;int&gt;s <b>d</b>, <b>x</b>, and <b>y</b>.
+Cannon i is located at the point (<b>d</b>[i], 0).
+Warship j is located at the point (<b>x</b>[j], <b>y</b>[j]).
+<br></br>
+<br></br>
+There are n! possible ways how to assign the cannons to the warships.
+A cannon trajectory is the line segment that connects the cannon and the warship. 
+An assignment of cannons to warships is good if all cannon trajectories are disjoint - in other words, if no two trajectories intersect each other.
+<br></br>
+<br></br>
+Count all good assignments of cannons to warships, and return that count modulo 10^9 + 7.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>CoastGuard</td></tr><tr><td>Method:</td><td>count</td></tr><tr><td>Parameters:</td><td>vector &lt;int&gt;, vector &lt;int&gt;, vector &lt;int&gt;</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int count(vector &lt;int&gt; d, vector &lt;int&gt; x, vector &lt;int&gt; y)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td>n will be between 1 and 50, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>d</b>, <b>x</b> and <b>y</b> will contain exactly n elements.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b>d</b> will be between -1,000 and 1,000, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b>x</b> will be betwene -1,000 and 1,000, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b>y</b> will be between 1 and 1,000, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Elements in <b>d</b> will be distinct.</td></tr><tr><td align="center" valign="top">-</td><td>All points (<b>x</b>[i], <b>y</b>[i]) will be distinct.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{-2, 2}</pre></td></tr><tr><td><pre>{0, 1}</pre></td></tr><tr><td><pre>{1, 2}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2">There are two cannons and two warships.
+Both assignments of cannons to warships are good, so we should return 2.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1,2}</pre></td></tr><tr><td><pre>{1,2}</pre></td></tr><tr><td><pre>{10,10}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1</pre></td></tr><tr><td><table><tr><td colspan="2">This time, the situation looks as follows:
+<ul>
+<li>Cannon 0 is located at (1,0).</li>
+<li>Cannon 1 is located at (2,0).</li>
+<li>Warship 0 is located at (1,10).</li>
+<li>Warship 1 is located at (2,10).</li>
+</ul>
+
+The only good assignment is (cannon 0 shoots warship 0, cannon 1 shoots warship 1).
+The other assignment is not good: the two cannon trajectories intersect.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{-2, 2, 98, 102}</pre></td></tr><tr><td><pre>{0, 1, 100, 101}</pre></td></tr><tr><td><pre>{1, 2, 1, 2}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 4</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{1,109,229,294,589,615,741,822,859,1000}</pre></td></tr><tr><td><pre>{546,850,287,452,864,874,529,879,818,589}</pre></td></tr><tr><td><pre>{414,176,191,15,764,825,204,477,34,460}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 400</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{-1,0,1}</pre></td></tr><tr><td><pre>{0,0,0}</pre></td></tr><tr><td><pre>{1,2,3}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 2</pre></td></tr><tr><td><table><tr><td colspan="2">Note that two line segments do also intersect if the endpoint of one segment lies on another segment.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">5)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{0}</pre></td></tr><tr><td><pre>{0}</pre></td></tr><tr><td><pre>{1}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>

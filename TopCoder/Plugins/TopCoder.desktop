@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=TopCoder
+Exec=javaws /home/yuanlei/Retired/TopCoder/Plugins/ContestAppletProd.jnlp
+Terminal=false
+Icon=/home/yuanlei/Retired/TopCoder/Plugins/TopCoder.png
+Type=Application
+Categories=Development
