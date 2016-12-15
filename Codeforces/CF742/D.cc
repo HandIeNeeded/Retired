@@ -6,6 +6,8 @@
 *************************************************************************/
 #include <vector>
 #include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <bitset>
 #include <utility>
 #include <cstdlib>
