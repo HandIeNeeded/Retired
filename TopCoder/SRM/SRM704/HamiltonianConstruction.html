@@ -1,0 +1,44 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>Given a directed graph with n vertices, a Hamiltonian path is a directed path of length n-1 that visits each vertex exactly once.
+<br></br>
+<br></br>
+You are given an int <b>k</b>.
+Construct a directed graph with the following properties:
+<ul>
+<li>The number of vertices (denoted n) is between 2 and 20, inclusive.</li>
+<li>The vertices are numbered 0 through n-1.</li>
+<li>There are no self-loops in the graph.</li>
+<li>For each pair of distinct vertices u and v, there is at most one edge from u to v and at most one edge from v to u.</li>
+<li>There are exactly <b>k</b> Hamiltonian paths that start in vertex 0 and end in vertex n-1.</li>
+</ul>
+
+For each <b>k</b> that satisfies the constraints specified below there is at least one such graph.
+If there are multiple such graphs, you may construct and return any of them.
+<br></br>
+<br></br>
+In order to return a graph with n vertices, return a vector &lt;string&gt; ret with n elements, each containing n characters.
+For each i and j, ret[i][j] should be 'Y' if there is an edge from i to j in your graph.
+Otherwise, ret[i][j] should be 'N'.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>HamiltonianConstruction</td></tr><tr><td>Method:</td><td>construct</td></tr><tr><td>Parameters:</td><td>int</td></tr><tr><td>Returns:</td><td>vector &lt;string&gt;</td></tr><tr><td>Method signature:</td><td>vector &lt;string&gt; construct(int k)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>k</b> will be between 1 and 100,000, inclusive.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>1</pre></td></tr></table></td></tr><tr><td><pre>Returns: {&quot;NY&quot;, &quot;NN&quot; }</pre></td></tr><tr><td><table><tr><td colspan="2">We are looking for a graph with exactly one Hamiltonian path from vertex 0 to vertex n-1.
+The simplest answer is a graph with n=2 vertices and a single edge 0 -> 1.
+Another correct answer is a graph with two vertices that contains both the edge 0 -> 1 and the edge 1 -> 0.
+There are also other correct answers with more than two vertices.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>3</pre></td></tr></table></td></tr><tr><td><pre>Returns: {&quot;NYYNY&quot;, &quot;YNYYY&quot;, &quot;YYNYY&quot;, &quot;YNYNY&quot;, &quot;YYYYN&quot; }</pre></td></tr><tr><td><table><tr><td colspan="2">This graph has 3 Hamiltonian paths from 0 to 4: 
+<ul>
+<li>0->1->2->3->4</li>
+<li>0->1->3->2->4</li>
+<li>0->2->1->3->4</li>
+</ul></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>720</pre></td></tr></table></td></tr><tr><td><pre>Returns: 
+{&quot;NYYYYYYY&quot;,
+ &quot;YNYYYYYY&quot;,
+ &quot;YYNYYYYY&quot;,
+ &quot;YYYNYYYY&quot;,
+ &quot;YYYYNYYY&quot;,
+ &quot;YYYYYNYY&quot;,
+ &quot;YYYYYYNY&quot;,
+ &quot;YYYYYYYN&quot; }</pre></td></tr><tr><td><table><tr><td colspan="2">This is a complete graph, so we have (8-2)! = 720 Hamiltonian paths from 0 to 7.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>288</pre></td></tr></table></td></tr><tr><td><pre>Returns: 
+{&quot;NYYYYNYY&quot;,
+ &quot;YNYYYYYY&quot;,
+ &quot;YYNYYYNY&quot;,
+ &quot;YYYNYYYY&quot;,
+ &quot;YNYYNYYY&quot;,
+ &quot;YYYYYNYN&quot;,
+ &quot;YYNYYYNY&quot;,
+ &quot;YYYYYNNN&quot; }</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
