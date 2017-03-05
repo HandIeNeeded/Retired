@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    freopen("x.in", "r", stdin);
+    freopen("x.txt", "w", stdout);
+    int T;
+    cin >> T;
+    for (int cas = 1; cas <= T; cas++)
+    {
+        int n, m, k;
+        cin >> n >> m >> k;
+        printf("Case #%d: ", cas);
+        if (2 * k + 3 > max(n, m)) puts("-1");
+        else
+        {
+            int ans = 100000000;
+            if (2 * k + 3 <= n && m > k)
+            {
+                if (m <= 2 * k) ans = min(ans, 2);
+                else
+                {
+                    ans = min(ans, (k + 2) / k + (((k + 2) % k) != 0) + 2);
+                    ans = min(ans, (m - 2 * k) / k + (((m - 2 * k) % k) != 0) + 2);
+                }
+            }
+            swap(m, n);
+            if (2 * k + 3 <= n && m > k)
+            {
+                if (m <= 2 * k) ans = min(ans, 2);
+                else
+                {
+                    ans = min(ans, (k + 2) / k + (((k + 2) % k) != 0) + 2);
+                    ans = min(ans, (m - 2 * k) / k + (((m - 2 * k) % k) != 0) + 2);
+                }
+            }
+            if (ans == 100000000) ans = -1;
+            printf("%d\n", ans);
+        }
+    }
+    return 0;
+}

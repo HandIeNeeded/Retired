@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <set>
+#include <algorithm>
+
+std::set<std::pair<int, int>> set;
+double area;
+
+double cross(int x0, int h0, int x1, int h1)
+{
+    if (h0 < 0 || h1 < 0) return 0;
+    if (h0 + h1 <= x1 - x0)
+        return 0.;
+    double h = (h0 + h1 + x0 - x1) * .5;
+    return h * h;
+}
+
+double sqr(double x)
+{
+    return x * x;
+}
+
+void remove(int x, int h) {
+    int xp, hp = -1, xq, hq = -1;
+
+    auto it = set.lower_bound(std::make_pair(x, h));
+    it ++;
+    if (it != set.end()) {
+        std::tie(xq, hq) = *it;
+    }
+    it = set.lower_bound(std::make_pair(x, h));
+    if (it != set.begin()) {
+        -- it;
+        std::tie(xp, hp) = *it;
+    }
+    area += -sqr(h) + cross(xp, hp, x, h) + cross(x, h, xq, hq) - cross(xp, hp, xq, hq);
+    set.erase(std::make_pair(x, h));
+}
+
+void insert(int x, int h) {
+    int xp, hp = -1, xq, hq = -1;
+
+    auto it = set.lower_bound(std::make_pair(x, h));
+    if (it != set.end()) {
+        std::tie(xq, hq) = *it;
+    }
+    it = set.lower_bound(std::make_pair(x, h));
+    if (it != set.begin()) {
+        -- it;
+        std::tie(xp, hp) = *it;
+    }
+    area += sqr(h) - cross(xp, hp, x, h) - cross(x, h, xq, hq) + cross(xp, hp, xq, hq);
+    set.insert(std::make_pair(x, h));
+}
+
+int main()
+{
+    int cas;
+    scanf("%d", &cas);
+    for (int ca = 1; ca <= cas; ++ ca) {
+        int n;
+        scanf("%d", &n);
+        int x, ax, bx, cx, h, ah, bh, ch;
+        scanf("%d%d%d%d", &x, &ax, &bx, &cx);
+        scanf("%d%d%d%d", &h, &ah, &bh, &ch);
+        set.clear();
+        decltype(set.end()) it;
+        area = 0;
+        double result = 0.;
+
+        for (int i = 1; i <= n; ++ i) {
+
+            while (true) {
+                it = set.lower_bound(std::make_pair(x, h));
+                if (it != set.end() && it->second < h && it->second + it->first - x <= h) {
+                    remove(it->first, it->second);
+                } else break;
+            }
+
+            while (true) {
+                it = set.lower_bound(std::make_pair(x, h));
+                if (it != set.begin()) -- it;
+                else break;
+                if (it->second < h && x - it->first + it->second <= h) {
+                    remove(it->first, it->second);
+                } else break;
+            }
+
+            bool flag = true;
+            it = set.lower_bound(std::make_pair(x, h));
+            if (it != set.end() && it->second > h && h + it->first - x <= it->second) flag = false;
+            if (it != set.begin()) {
+                it --;
+                if (it->second > h && h + x - it->first <= it->second) flag = false;
+            }
+
+            if (flag) {
+                insert(x, h);
+            }
+
+            result += area;
+
+            x = (ax * 1ll * x + bx) % cx + 1;
+            h = (ah * 1ll * h + bh) % ch + 1;
+        }
+        printf("Case #%d: %.6f\n", ca, result);
+    }
+}

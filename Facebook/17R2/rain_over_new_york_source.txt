@@ -1,0 +1,208 @@
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <set>
+#include <map>
+#include <algorithm>
+#include <functional>
+#include <utility>
+#include <bitset>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstdio>
+
+using namespace std;
+
+#define REP(i,n) for((i)=0;(i)<(int)(n);(i)++)
+#define snuke(c,itr) for(__typeof((c).begin()) itr=(c).begin();itr!=(c).end();itr++)
+
+typedef long long ll;
+#define MOD 1000000007ll
+
+int pos;
+int N;
+ll H; // 1 <= N <= 200000, 2 <= H <= 10^9, 0 < a[i] < H
+ll a[200010];
+ll s[200010];
+ll ss[200010];
+
+ll black, white, gray, blue, cnt;
+
+void func(int L1, int L2, int R1, int R2, ll h){
+	int L,R,i,j;
+	
+/*	for(L=L1;L<=L2;L++) for(R=R1;R<=R2;R++){
+		for(i=h;i<=H;i++) for(j=i+1;j<=H;j++){
+			cnt++;
+			white = (white + (ll)(R - L) * (j - i)) % MOD;
+			ll tmp = (ll)(R - L) * i % MOD;
+			tmp = (tmp - s[R] + s[L] + MOD) % MOD;
+			blue = (blue + tmp) % MOD;
+		}
+	} */
+	
+	ll dL = L2 - L1;
+	ll dR = R2 - R1;
+	ll dH = H - h;
+	ll dH2 = (dH * (dH + 1) / 2) % MOD;
+	cnt = (cnt + (dL + 1) * (dR + 1) % MOD * dH2) % MOD;
+	
+	ll whitex = 0;
+	ll dL2 = (dL * (dL + 1) / 2) % MOD;
+	ll dR2 = (dR * (dR + 1) / 2) % MOD;
+	whitex = (whitex + (dL + 1) * (dR + 1)) % MOD;
+	whitex = (whitex + dL2 * (dR + 1)) % MOD;
+	whitex = (whitex + (dL + 1) * dR2) % MOD;
+	
+	ll inv6 = 1;
+	while(inv6 % 6 != 0) inv6 += MOD;
+	inv6 /= 6;
+	ll whitey = dH * (dH + 1) % MOD * (dH + 2) % MOD * inv6 % MOD;
+	
+	white = (white + whitex * whitey) % MOD;
+	
+	/*
+	for(L=L1;L<=L2;L++) for(R=R1;R<=R2;R++){
+		for(i=h;i<=H;i++) for(j=i+1;j<=H;j++){
+			ll tmp = (ll)(R - L) * i % MOD;
+			tmp = (tmp - s[R] + s[L] + MOD) % MOD;
+			blue = (blue + tmp) % MOD;
+		}
+	}
+	*/
+	
+	ll isum = (2 * h * h % MOD - h * (H + 1) % MOD - (H - 1) * H % MOD + 2 * MOD) % MOD;
+	isum = isum * (h - H - 1 + MOD) % MOD;
+	isum = isum * inv6 % MOD;
+	blue = (blue + isum * whitex) % MOD;
+	
+	/*
+	for(L=L1;L<=L2;L++) for(R=R1;R<=R2;R++){
+		for(i=h;i<=H;i++) for(j=i+1;j<=H;j++){
+			ll tmp = 0;
+			tmp = (tmp - s[R] + s[L] + MOD) % MOD;
+			blue = (blue + tmp) % MOD;
+		}
+	}
+	*/
+	
+	ll Rsum = (ss[R2+1] - ss[R1] + MOD) % MOD;
+	ll Lsum = (ss[L2+1] - ss[L1] + MOD) % MOD;
+	Rsum = Rsum * (dL + 1) % MOD;
+	Lsum = Lsum * (dR + 1) % MOD;
+	ll diff = (Lsum - Rsum + MOD) % MOD;
+	blue = (blue + diff * dH2) % MOD;
+}
+
+void main3(void){
+	int i,j;
+//	ll black = 0, white = 0, gray = 0, blue = 0, cnt = 0;
+	black = white = gray = blue = cnt = 0;
+	
+//	cerr << N << ' ' << H << endl;
+//	REP(i,N) cerr << a[i] << ' ';
+//	cerr << endl;
+
+	// testing
+//	N = 200000;
+//	H = 1000000000;
+//	REP(i,N) a[i] = rand() % (H + 1);
+	// testing
+	
+	REP(i,N) s[i+1] = (s[i] + a[i]) % MOD;
+	REP(i,N+1) ss[i+1] = (ss[i] + s[i]) % MOD;
+	
+	vector <pair <ll, int> > v; // height, pos
+	REP(i,N) v.push_back(make_pair(a[i], i));
+	sort(v.begin(),v.end());
+	reverse(v.begin(),v.end());
+	
+	set <int> used;
+	used.insert(-1);
+	used.insert(N);
+	
+	REP(i,v.size()){
+		int h = v[i].first;
+		int x = v[i].second;
+		used.insert(x);
+		__typeof(used.begin()) itr = used.find(x);
+		itr--;
+		int xL = (*itr);
+		itr++; itr++;
+		int xR = (*itr);
+		func(xL+1, x, x+1, xR, h);
+	}
+	
+	// testing
+/*	cerr << black << ' ' << white << ' ' << gray << ' ' << blue << ' ' << cnt << endl;
+	
+	black = white = gray = blue = cnt = 0;
+	int L,R;
+	
+	REP(L,N+1) REP(R,N+1) if(L < R){
+		int h = 0;
+		for(i=L;i<R;i++) h = max(h, (int)a[i]);
+		
+		for(i=h;i<=H;i++) for(j=i+1;j<=H;j++){
+			cnt++;
+			white = (white + (ll)(R - L) * (j - i)) % MOD;
+			ll tmp = (ll)(R - L) * i % MOD;
+			tmp = (tmp - s[R] + s[L] + MOD) % MOD;
+			blue = (blue + tmp) % MOD;
+		}
+	}
+	
+	cerr << black << ' ' << white << ' ' << gray << ' ' << blue << ' ' << cnt << endl; */
+	// testing
+	
+	ll one_gray = s[N];
+	ll one_black = ((ll)N * H % MOD + MOD - one_gray) % MOD;
+	gray = one_gray * cnt % MOD;
+	black = one_black * cnt % MOD;
+	black = (black - white + MOD) % MOD;
+	black = (black - blue + MOD) % MOD;
+	
+	cout << (MOD - black) % MOD << ' ' << (MOD - white) % MOD << ' ' << (MOD - gray) % MOD << ' ' << (MOD - blue) % MOD << endl;
+}
+
+void gen(int L, ll S, ll A, ll B){
+	int i;
+	ll x = S;
+	
+	REP(i,L){
+		a[pos+i] = x;
+		x = (x * A + B) % (H - 1) + 1;
+	}
+}
+
+void main2(void){
+	int K,i,j;
+	
+	cin >> H >> N >> K;
+	
+	pos = 0;
+	REP(i,K){
+		int L,S,A,B;
+		cin >> L >> S >> A >> B;
+		gen(L, S, A, B);
+		pos += L;
+	}
+	
+	main3();
+}
+
+int main(void){
+	int TC,tc;
+	cin >> TC;
+	REP(tc,TC){
+		printf("Case #%d: ", tc + 1);
+		main2();
+	}
+	return 0;
+}

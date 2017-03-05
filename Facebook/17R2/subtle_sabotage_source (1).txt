@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <algorithm>
+
+int main()
+{
+    int cas;
+    int n, m, k;
+    scanf("%d", &cas);
+    for (int ca = 1; ca <= cas; ++ ca) {
+        scanf("%d%d%d", &n, &m, &k);
+        if (n > m) std::swap(n, m);
+        const int INF = 0x3f3f3f3f;
+        int result = INF;
+        if (k < n && 2 * k + 3 <= m) {
+            result = (n - 1) / k + 1;
+        }
+        if (k > 1 && m >= 2 * k + 3 && n >= 2 * k + 1) {
+            result = std::min(result, 4);
+        }
+        if (k == 1 && m >= 5 && n >= 3) {
+            result = std::min(result, 5);
+        }
+        if (result == INF) {
+            result = -1;
+        }
+        printf("Case #%d: %d\n", ca, result);
+    }
+}
