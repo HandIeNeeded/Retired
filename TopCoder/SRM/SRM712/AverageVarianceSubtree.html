@@ -1,0 +1,55 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>In probability theory and statistics, variance is the expectation of the squared deviation of a random variable from its mean.
+As a special case, we can compute the variance of a nonempty finite collection of numbers X = { x_1, ..., x_n } as follows:
+<ol>
+<li>Let mu = (x_1 + ... + x_n) / n be the mean of the collection.</li>
+<li>Let y_i = (x_i - mu)^2 be the square of the difference between x_i and the mean.</li>
+<li>The variance of X, denoted var(X), can now be computed as the average of all y_i. (In other words, as the sum of all y_i, divided by n.)</li>
+</ol>
+
+For example, if X = { 0, 1 }, we have mu = 1/2, then y_1 = y_2 = 1/4, and finally var(X) = (1/4 + 1/4) / 2 = 1/4.
+<br></br>
+<br></br>
+Another example: suppose X = { 0, 0, 0, 1 }. Now we have mu = 1/4. Then we compute that y_1 = y_2 = y_3 = 1/16 and y_4 = 9/16. The average of these four values is 3/16.
+<br></br>
+<br></br>
+You are given a tree T with n vertices, labeled 0 through n-1.
+More precisely, you are given the vector &lt;int&gt; <b>p</b> with n-1 elements that describes the edges of the tree.
+For each valid i, there is an edge between (i+1) and <b>p</b>[i].
+The constraints ensure that this will always be a valid tree.
+<br></br>
+<br></br>
+Each vertex of the tree has a positive integer weight.
+You are given these weights in the vector &lt;int&gt; <b>weight</b> with n elements.
+<br></br>
+<br></br>
+A subtree of the tree T is any subgraph that is a tree.
+Alice found all nonempty subtrees of T.
+For each of them, she took the collection of weights of its vertices and she computed its variance.
+Bob then computed the average of all the variances computed by Alice.
+Compute and return the number Bob computed.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>AverageVarianceSubtree</td></tr><tr><td>Method:</td><td>average</td></tr><tr><td>Parameters:</td><td>vector &lt;int&gt;, vector &lt;int&gt;</td></tr><tr><td>Returns:</td><td>double</td></tr><tr><td>Method signature:</td><td>double average(vector &lt;int&gt; p, vector &lt;int&gt; weight)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Notes</h3></td></tr><tr><td align="center" valign="top">-</td><td>The returned value must have an absolute or relative error less than 1e-9.</td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>weight</b> will contain between 1 and 50 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b>weight</b> will be between 1 and 1,000,000,000, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>p</b> will contain exactly |<b>weight</b>|-1 elements.</td></tr><tr><td align="center" valign="top">-</td><td>For each i, 0 &lt;= <b>p</b>[i] &lt;= i.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{0,1}</pre></td></tr><tr><td><pre>{10,20,30}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 19.444444444444443</pre></td></tr><tr><td><table><tr><td colspan="2">The tree contains the edges 1-0 and 2-1.
+Thus, it looks as follows: 0-1-2.
+
+This tree has six different subtrees.
+These correspond to the following collections of weights: {10}, {20}, {30}, {10,20}, {20,30}, and {10,20,30}.
+Their variances are 0, 0, 0, 25, 25, and 200/3.
+The return value is the average of these six numbers.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{0,1,1}</pre></td></tr><tr><td><pre>{10,20,7,6}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 23.014520202020204</pre></td></tr><tr><td><table><tr><td colspan="2">This time the tree looks as shown below. (The numbers in the figure are the weights of those vertices.)
+<pre>
+10 - 20 - 7
+     |
+     6
+</pre>
+This tree has 11 nonempty subtrees.
+Below we list the collection of weights and its variance for each of the subtrees.
+<ul>
+<li>{10}, 0.0000000000000000</li>
+<li>{20}, 0.0000000000000000</li>
+<li>{7}, 0.0000000000000000</li>
+<li>{6}, 0.0000000000000000</li>
+<li>{10,20}, 25.0000000000000000</li>
+<li>{7,20}, 42.2500000000000000</li>
+<li>{6,20}, 49.0000000000000000</li>
+<li>{20,7,6}, 40.6666666666666643</li>
+<li>{10,20,6}, 34.6666666666666643</li>
+<li>{10,20,7}, 30.8888888888888857</li>
+<li>{10,20,7,6}, 30.6875000000000000</li>
+</ul></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{0}</pre></td></tr><tr><td><pre>{1,1000000000}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 8.3333333166666672E16</pre></td></tr><tr><td><table><tr><td colspan="2">The answer can be very large</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{0,0,1,0,2,3,3,6}</pre></td></tr><tr><td><pre>{1,11,111,1111,11111,111111,1111111,11111111,111111111}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 4.432586365551196E14</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>{}</pre></td></tr><tr><td><pre>{712}</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0.0</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
