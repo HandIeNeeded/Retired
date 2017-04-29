@@ -18,13 +18,14 @@
 #include <iostream>
 #include <algorithm>
 #include <functional>
+#include <iomanip>
 #include <numeric>
 using namespace std;
 
 class $CLASSNAME$ {
 public:
-    $RC$ $METHODNAME$($METHODPARMS$);
-    $TESTCODE$
+  $RC$ $METHODNAME$($METHODPARMS$);
+  $TESTCODE$
 };
 
 $RC$ $CLASSNAME$::$METHODNAME$($METHODPARMS$) {
@@ -36,10 +37,10 @@ $RC$ $CLASSNAME$::$METHODNAME$($METHODPARMS$) {
 $CLASSNAME$ solver;
 
 int main() {
-    solver.run_test(-1);
-    
-    std::cerr << "---------------------------" << std::endl;
-    std::cerr << "Time used: " << 1.0 * clock() / CLOCKS_PER_SEC << " sec." << std::endl;
-    return 0;
+  solver.run_test(-1);
+  
+  std::cerr << "---------------------------" << std::endl;
+  std::cerr << "Time used: " << 1.0 * clock() / CLOCKS_PER_SEC << " sec." << std::endl;
+  return 0;
 }
 // END CUT HERE

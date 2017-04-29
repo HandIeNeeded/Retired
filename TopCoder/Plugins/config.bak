@@ -1,5 +1,5 @@
 #TopCoder ContestApplet Preferences File
-#Thu Apr 27 15:02:27 CDT 2017
+#Fri Apr 28 14:42:04 CDT 2017
 com.topcoder.client.contestApplet.common.LocalPreferences.menufont=Dialog
 com.topcoder.client.contestApplet.common.LocalPreferences.menufontsize=12
 com.topcoder.client.contestApplet.common.LocalPreferences.commonclasspath=
@@ -162,10 +162,13 @@ com.topcoder.client.contentApplet.panels.ChatPanel.moderatedChatSpeakerFore=-1
 com.topcoder.client.contentApplet.panels.ChatPanel.moderatedChatQuestionFore=-16711936
 com.topcoder.client.contentApplet.panels.ChatPanel.moderatedChatSpeakerBack=-16777216
 com.topcoder.jmaContestApplet.frames.codingframe.location=0\:22
-com.topcoder.jmaContestApplet.frames.codingframe.size=1276\:778
-com.topcoder.jmaContestApplet.frames.codingframe.dividerloc=221
+com.topcoder.jmaContestApplet.frames.codingframe.size=1275\:756
+com.topcoder.jmaContestApplet.frames.codingframe.dividerloc=436
+com.topcoder.jmaContestApplet.frames.sourceViewer.location=0\:22
+com.topcoder.jmaContestApplet.frames.sourceViewer.size=760\:360
+com.topcoder.jmaContestApplet.frames.sourceViewer.dividerloc=80
 ui.theme=Default
-fileeditor.config.dirName=/User/yuanlei/Retired/TopCoder/SRM_LATEST
+fileeditor.config.dirName=/Users/yuanlei/Retired/TopCoder/SRM_LATEST
 fileeditor.config.fileName=problem
 fileeditor.config.beginCut=// BEGIN CUT HERE
 fileeditor.config.endCut=// END CUT HERE
@@ -179,7 +182,7 @@ fileeditor.config.breakAt=60
 fileeditor.config.htmldesc=true
 fileeditor.config.backup=false
 fileeditor.config.javatemplate=$BEGINCUT$\n$PROBLEMDESC$\n$ENDCUT$\nimport java.util.*;\npublic class $CLASSNAME$ {\n\tpublic $RC$ $METHODNAME$($METHODPARMS$) {\n\t\t\n\t}\n\tpublic static void main(String[] args) {\n\t\t$CLASSNAME$ temp \= new $CLASSNAME$();\n\t\tSystem.out.println(temp.$METHODNAME$($METHODPARMS$));\n\t}\n}
-fileeditor.config.cpptemplate=\#include <vector>\n\#include <cstdio>\n\#include <cstdlib>\n\#include <bitset>\n\#include <utility>\n\#include <sstream>\n\#include <fstream>\n\#include <set>\n\#include <map>\n\#include <deque>\n\#include <queue>\n\#include <cmath>\n\#include <stack>\n\#include <string>\n\#include <iostream>\n\#include <algorithm>\n\#include <functional>\n\#include <cassert>\n\#include <numeric>\nusing namespace std;\n\nclass $CLASSNAME$ {\npublic\:\n  $RC$ $METHODNAME$($METHODPARAMETERS$);\n  $TESTCODE$\n};\n\n$RC$ $CLASSNAME$\:\:$METHODNAME$($METHODPARAMETERS$) {\n\n}\n//Created by Yuan Lei\n\n
+fileeditor.config.cpptemplate=\#include <vector>\n\#include <cstdio>\n\#include <cstdlib>\n\#include <bitset>\n\#include <utility>\n\#include <sstream>\n\#include <fstream>\n\#include <set>\n\#include <map>\n\#include <deque>\n\#include <queue>\n\#include <cmath>\n\#include <stack>\n\#include <string>\n\#include <iostream>\n\#include <algorithm>\n\#include <functional>\n\#include <cassert>\n\#include <numeric>\n\#include <iomanip>\nusing namespace std;\n\nclass $CLASSNAME$ {\npublic\:\n  $RC$ $METHODNAME$($METHODPARMS$);\n  $TESTCODE$\n};\n\n$RC$ $CLASSNAME$\:\:$METHODNAME$($METHODPARMS$) {\n\n}// Created by Yuan Lei\n\n// BEGIN CUT HERE\n$CLASSNAME$ solver;\n\nint main() {\n  solver.run_test(-1);\n  \n  cerr << "-----------------------------------" << endl;\n  cerr << "Time used\: " << 1.0 * clock() / CLOCKS_PER_SEC << endl;\n  return 0;\n}\n\n// END CUT HERE\n\n\n\n
 fileeditor.config.csharptemplate=using System;\r\nusing System.Collections;\r\npublic class $CLASSNAME$ {\r\n\tpublic $RC$ $METHODNAME$($METHODPARMS$) {\r\n\t\t$CARETPOSITION$\r\n\t}\r\n}
 fileeditor.config.javaextension=java
 fileeditor.config.cppextension=cc
