@@ -1,5 +1,5 @@
 #TopCoder ContestApplet Preferences File
-#Fri Apr 28 14:42:04 CDT 2017
+#Mon May 08 03:42:55 JST 2017
 com.topcoder.client.contestApplet.common.LocalPreferences.menufont=Dialog
 com.topcoder.client.contestApplet.common.LocalPreferences.menufontsize=12
 com.topcoder.client.contestApplet.common.LocalPreferences.commonclasspath=
@@ -161,11 +161,11 @@ com.topcoder.client.contentApplet.panels.ChatPanel.moderatedChatQuestionBack=-16
 com.topcoder.client.contentApplet.panels.ChatPanel.moderatedChatSpeakerFore=-1
 com.topcoder.client.contentApplet.panels.ChatPanel.moderatedChatQuestionFore=-16711936
 com.topcoder.client.contentApplet.panels.ChatPanel.moderatedChatSpeakerBack=-16777216
-com.topcoder.jmaContestApplet.frames.codingframe.location=0\:22
+com.topcoder.jmaContestApplet.frames.codingframe.location=0\:43
 com.topcoder.jmaContestApplet.frames.codingframe.size=1275\:756
 com.topcoder.jmaContestApplet.frames.codingframe.dividerloc=436
 com.topcoder.jmaContestApplet.frames.sourceViewer.location=0\:22
-com.topcoder.jmaContestApplet.frames.sourceViewer.size=760\:360
+com.topcoder.jmaContestApplet.frames.sourceViewer.size=1276\:778
 com.topcoder.jmaContestApplet.frames.sourceViewer.dividerloc=80
 ui.theme=Default
 fileeditor.config.dirName=/Users/yuanlei/Retired/TopCoder/SRM_LATEST
