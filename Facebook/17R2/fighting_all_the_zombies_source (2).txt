@@ -1,0 +1,152 @@
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <set>
+#include <map>
+#include <algorithm>
+#include <functional>
+#include <utility>
+#include <bitset>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <cstdio>
+
+using namespace std;
+
+#define REP(i,n) for((i)=0;(i)<(int)(n);(i)++)
+#define snuke(c,itr) for(__typeof((c).begin()) itr=(c).begin();itr!=(c).end();itr++)
+
+typedef long long ll;
+#define MOD 1000000007ll
+
+#define T (1<<20)
+
+int N,M;
+ll W[T];
+ll D[T];
+ll Z[T];
+ll S[T];
+
+int p[T]; // i - i
+int q[T]; // i - i+1
+int r[T]; // i+1 - i
+
+struct node {int a[2][2];};
+node tree[2*T];
+
+int LL,RR;
+
+void update(int id, int L, int R){
+	int i,j;
+	
+	if(RR < L || LL >= R) return;
+	
+	int M = (L + R) / 2;
+	if(R - L > 1){
+		update(2*id, L, M);
+		update(2*id+1, M, R);
+	}
+	
+	if(R - L == 1){
+		tree[id].a[0][0] = 1;
+		tree[id].a[1][1] = p[L];
+		tree[id].a[0][1] = tree[id].a[1][0] = 0;
+	} else if(R - L == 2){
+		tree[id].a[0][0] = 1;
+		tree[id].a[1][1] = ((ll)q[L] * r[L] + (ll)p[L] * p[L+1]) % MOD;
+		tree[id].a[0][1] = p[L+1];
+		tree[id].a[1][0] = p[L];
+	} else {
+		REP(i,2) REP(j,2){
+			ll tmp = 0;
+			tmp = (ll)tree[2*id].a[i][1] * tree[2*id+1].a[1][j] % MOD;
+			tmp = (tmp + (ll)tree[2*id].a[i][0] * q[M-1] % MOD * r[M-1] % MOD * tree[2*id+1].a[0][j]) % MOD;
+			tree[id].a[i][j] = tmp;
+		}
+	}
+	
+	// cerr << "A" << L << ' ' << R << ' ' << tree[id].a[1][1] << endl;
+}
+
+void init(void){
+	int i;
+	
+	REP(i,T){
+		p[i] = 1;
+		q[i] = r[i] = 0;
+	}
+	
+	LL = 0;
+	RR = T - 1;
+	update(1, 0, T);
+}
+
+ll query(int s, int t, int cnt){ // cerr << N << ' ' << s << ' ' << t << ' ' << cnt << endl;
+	if(s == t){
+		p[s] = (p[s] + cnt) % MOD;
+	} else if(s < t){
+		q[s] = (q[s] + cnt) % MOD;
+	} else {
+		r[t] = (r[t] + cnt) % MOD;
+	}
+	
+	LL = min(s, t);
+	RR = max(s, t);
+	update(1, 0, T);
+	
+	// cerr << tree[1].a[1][1] << endl;
+	
+	return tree[1].a[1][1];
+}
+
+void main2(void){
+	int i;
+	
+	cin >> N >> M;
+	
+	ll W1,AW,BW;
+	cin >> W1 >> AW >> BW;
+	W[0] = W1;
+	for(i=1;i<M;i++) W[i] = (W[i-1] * AW + BW) % N + 1;
+	REP(i,M) W[i]--;
+	
+	ll D1,AD,BD;
+	cin >> D1 >> AD >> BD;
+	D[0] = D1;
+	for(i=1;i<M;i++) D[i] = (D[i-1] * AD + BD) % 3;
+	REP(i,M){
+		Z[i] = W[i] + D[i] - 1;
+		if(Z[i] < 0) Z[i] = 0;
+		if(Z[i] >= N) Z[i] = N - 1;
+	}
+	
+	ll S1,AS,BS;
+	cin >> S1 >> AS >> BS;
+	S[0] = S1;
+	for(i=1;i<M;i++) S[i] = (S[i-1] * AS + BS) % 1000000000 + 1;
+	
+	init();
+	ll ans = 0;
+	REP(i,M){
+		ll tmp = query(W[i], Z[i], S[i]);
+		ans = (ans + tmp) % MOD;
+	}
+	
+	cout << ans << endl;
+}
+
+int main(void){
+	int TC,tc;
+	cin >> TC;
+	REP(tc,TC){
+		printf("Case #%d: ", tc + 1);
+		main2();
+	}
+	return 0;
+}

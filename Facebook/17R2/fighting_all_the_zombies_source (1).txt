@@ -1,0 +1,113 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int md = 1000000007;
+
+inline void add(int &a, int b) {
+  a += b;
+  if (a >= md) {
+    a -= md;
+  }
+}
+
+inline int mul(int a, int b) {
+  return (long long) a * b % md;
+}
+
+const int N = 800010;
+
+struct node {
+  int a[2][2];
+} t[4 * N];
+
+int a[N][3];
+int w[N], d[N], z[N], s[N];
+
+void build(int x, int l, int r) {
+  t[x].a[0][0] = 0;
+  t[x].a[0][1] = 0;
+  t[x].a[1][0] = 1;
+  t[x].a[1][1] = 1;
+  if (l == r) {
+    return;
+  }
+  int y = (l + r) >> 1;
+  build(x + x, l, y);
+  build(x + x + 1, y + 1, r);
+}
+
+void modify(int x, int l, int r, int p) {
+  if (l == r) {
+    t[x].a[0][0] = 0;
+    t[x].a[0][1] = mul(a[l][0], a[l - 1][2]);
+    t[x].a[1][0] = 1;
+    t[x].a[1][1] = a[l][1];
+    return;
+  }
+  int y = (l + r) >> 1;
+  if (p <= y) {
+    modify(x + x, l, y, p);
+  } else {
+    modify(x + x + 1, y + 1, r, p);
+  }
+  for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 2; j++) {
+      int c = 0;
+      for (int k = 0; k < 2; k++) {
+        add(c, mul(t[x + x].a[i][k], t[x + x + 1].a[k][j]));
+      }
+      t[x].a[i][j] = c;
+    }
+  }
+}
+
+int main() {
+  int tt;
+  scanf("%d", &tt);
+  for (int qq = 1; qq <= tt; qq++) {
+    printf("Case #%d: ", qq);
+    int n, m;
+    scanf("%d %d", &n, &m);
+    {
+      int Aw, Bw;
+      scanf("%d %d %d", w, &Aw, &Bw);
+      for (int i = 1; i < m; i++) {
+        w[i] = ((long long) Aw * w[i - 1] + Bw) % n + 1;
+      }
+    }
+    {
+      int Ad, Bd;
+      scanf("%d %d %d", d, &Ad, &Bd);
+      for (int i = 1; i < m; i++) {
+        d[i] = ((long long) Ad * d[i - 1] + Bd) % 3;
+      }
+    }
+    {
+      for (int i = 0; i < m; i++) {
+        z[i] = max(1, min(n, w[i] + d[i] - 1));
+      }
+    }
+    {
+      int As, Bs;
+      scanf("%d %d %d", s, &As, &Bs);
+      for (int i = 1; i < m; i++) {
+        s[i] = ((long long) As * s[i - 1] + Bs) % 1000000000 + 1;
+      }
+    }
+    for (int i = 0; i <= n; i++) {
+      for (int j = 0; j < 3; j++) {
+        a[i][j] = ((i > 0 && j == 1) ? 1 : 0);
+      }
+    }
+    build(1, 1, n);
+    int ans = 0;
+    for (int i = 0; i < m; i++) {
+      add(a[w[i]][z[i] - w[i] + 1], s[i]);
+      modify(1, 1, n, max(w[i], z[i]));
+      add(ans, t[1].a[1][1]);
+    }
+    printf("%d\n", ans);
+  }
+  return 0;
+}
