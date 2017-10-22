@@ -1,0 +1,41 @@
+<html><body bgcolor="#000000" text="#ffffff"><table><tr><td colspan="2"><h3>Problem Statement</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td>This task is about an ancient game.
+The game is played on a rectangular board divided into a grid of <b>n</b> rows by <b>m</b> columns of cells.
+You are given the ints <b>n</b> and <b>m</b>.
+Rows are numbered 0 through <b>n</b>-1 from top to bottom, columns are numbered 0 through <b>m</b>-1 from left to right.
+We will use (x, y) to denote a cell in row x and column y.
+<br></br>
+<br></br>
+At any point during the game each cell is either empty or it contains exactly one token.
+A move in the game looks as follows:
+The player selects a cell and a direction: up, down, left, or right.
+The selected cell must contain a token.
+There must be a next cell in the chosen direction, and that cell must be empty.
+The actual move then consists of taking the token and moving it into the next cell in the chosen direction.
+<br></br>
+<br></br>
+You are given a list of moves: two vector &lt;int&gt;s <b>x</b> and <b>y</b> and a string <b>d</b>.
+For each valid i, the values <b>x</b>[i], <b>y</b>[i] and the character <b>d</b>[i] describe one move in which the player selects the cell (<b>x</b>[i], <b>y</b>[i]) and the direction <b>d</b>[i].
+Each direction will be one of 'U', 'D', 'L', 'R', standing for up, down, left, and right, respectively.
+Note that 'U' represents the move from (x, y) to (x-1, y), and 'L' represents the move from (x, y) to (x, y-1).
+<br></br>
+<br></br>
+A list of moves is called <i>valid</i> if there is some initial configuration of arbitrarily many tokens on the board (with at most one token in each cell) such that it is possible to perform all the moves on the list in the given order.
+I.e., when executing the moves one after another, the chosen cell must always contain a token and the chosen direction must always point to an empty adjacent cell.
+<br></br>
+<br></br>
+We want to change the given list of moves into a valid list.
+We can erase some moves from the given list, without changing the relative order of the other moves on the list.
+Compute and return the smallest number of moves we have to erase.</td></tr><tr><td colspan="2"><h3>Definition</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Class:</td><td>AncientGameRecord</td></tr><tr><td>Method:</td><td>minimalRemove</td></tr><tr><td>Parameters:</td><td>int, int, vector &lt;int&gt;, vector &lt;int&gt;, string</td></tr><tr><td>Returns:</td><td>int</td></tr><tr><td>Method signature:</td><td>int minimalRemove(int n, int m, vector &lt;int&gt; x, vector &lt;int&gt; y, string d)</td></tr><tr><td colspan="2">(be sure your method is public)</td></tr></table></td></tr><tr><td colspan="2"><h3>Limits</h3></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td>Time limit (s):</td><td>2.000</td></tr><tr><td>Memory limit (MB):</td><td>256</td></tr><tr><td>Stack limit (MB):</td><td>256</td></tr></table></td></tr><tr><td colspan="2"><h3>Constraints</h3></td></tr><tr><td align="center" valign="top">-</td><td><b>n</b>, <b>m</b> will be between 2 and 50, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>x</b> will contain between 1 and 1,000 elements, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td><b>x</b>, <b>y</b> and <b>d</b> will contain the same number of elements.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b>x</b> will be between 0 and <b>n</b>-1, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each element in <b>y</b> will be between 0 and <b>m</b>-1, inclusive.</td></tr><tr><td align="center" valign="top">-</td><td>Each character in <b>d</b> will be one of {'U', 'D', 'L', 'R'}.</td></tr><tr><td colspan="2"><h3>Examples</h3></td></tr><tr><td align="center" nowrap="true">0)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>2</pre></td></tr><tr><td><pre>2</pre></td></tr><tr><td><pre>{0,1,1,0}</pre></td></tr><tr><td><pre>{0,0,1,1}</pre></td></tr><tr><td><pre>&quot;DRUL&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: 0</pre></td></tr><tr><td><table><tr><td colspan="2">We don't need to remove any moves. Suppose the board initially contains one token at (0,0), we will move it 4 times: (0,0) -> (1,0) -> (1,1) -> (0,1).</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">1)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>2</pre></td></tr><tr><td><pre>2</pre></td></tr><tr><td><pre>{0,1}</pre></td></tr><tr><td><pre>{1,0}</pre></td></tr><tr><td><pre>&quot;LU&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1</pre></td></tr><tr><td><table><tr><td colspan="2">This is not a valid list of moves.
+Move 0 wants us to move a token from (0, 1) leftwards - to (0, 0).
+Move 1 wants us to move a token from (1, 0) upwards - again to (0, 0).
+Regardless of the original configuration of tokens, if we can perform move 0, it means that the cell (0, 0) now contains a token and therefore we won't be able to perform move 1.
+Erasing either move from the list produces a valid list.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">2)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>3</pre></td></tr><tr><td><pre>3</pre></td></tr><tr><td><pre>{0,0,0,1,2,1}</pre></td></tr><tr><td><pre>{0,1,1,1,1,2}</pre></td></tr><tr><td><pre>&quot;RLDDRL&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: 1</pre></td></tr><tr><td><table><tr><td colspan="2">The list is not valid because in moves 1 and 2 we try to move a token away from the cell (0, 1) twice in a row.
+One optimal solution is to erase move 1.
+One possible initial configuration of tokens and the execution of the remaining moves is shown below.
+<pre>
+o..    .o.    ...    ...    ...    ...    
+..o -> ..o -> .oo -> ..o -> ..o -> .o.
+...    ...    ...    .o.    ..o    ..o
+</pre></td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">3)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>3</pre></td></tr><tr><td><pre>3</pre></td></tr><tr><td><pre>{0,0,2,2}</pre></td></tr><tr><td><pre>{0,0,2,2}</pre></td></tr><tr><td><pre>&quot;ULDR&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: 4</pre></td></tr><tr><td><table><tr><td colspan="2">We need to erase all four moves from this list.
+None of these moves can be on a valid list because in each case the cell is in the corner of the grid and the chosen direction points outside the grid.
+We cannot move a token off the grid.</td></tr></table></td></tr></table></td></tr><tr><td align="center" nowrap="true">4)</td><td></td></tr><tr><td>&#160;&#160;&#160;&#160;</td><td><table><tr><td><table><tr><td><pre>6</pre></td></tr><tr><td><pre>6</pre></td></tr><tr><td><pre>{0,5,4,1,3,2,5,4,2,2,5,4,1,3,2,5}</pre></td></tr><tr><td><pre>{5,4,1,1,1,2,3,5,4,2,0,2,0,0,2,1}</pre></td></tr><tr><td><pre>&quot;DRULLLUDRUDLRUDL&quot;</pre></td></tr></table></td></tr><tr><td><pre>Returns: 4</pre></td></tr><tr><td><table><tr><td colspan="2"></td></tr></table></td></tr></table></td></tr></table><p>This problem statement is the exclusive and proprietary property of TopCoder, Inc.  Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited.  (c)2003, TopCoder, Inc.  All rights reserved.  </p></body></html>
