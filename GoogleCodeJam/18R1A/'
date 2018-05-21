@@ -1,0 +1,39 @@
+/*************************************************************************
+  >         File: A.cc
+  >       Author: Yuan Lei
+  >         Mail: yuanlei@fb.com
+  > Created Time: Sat 14 Apr 01:57:16 2018
+*************************************************************************/
+#include <vector>
+#include <cstdio>
+#include <bitset>
+#include <utility>
+#include <cstdlib>
+#include <sstream>
+#include <fstream>
+#include <cstring>
+#include <cassert>
+#include <numeric>
+#include <set>
+#include <map>
+#include <deque>
+#include <cmath>
+#include <ctime>
+#include <queue>
+#include <stack>
+#include <string>
+#include <iostream>
+#include <algorithm>
+#include <functional>
+#include <iomanip>
+
+std::vector<int> idx, idy;
+
+
+int main() {
+  std::ios::sync_with_stdio(0);
+  
+
+
+  return 0;
+}
